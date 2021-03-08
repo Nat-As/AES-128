@@ -7,3 +7,5 @@ set(SOURCE_FILES main.cpp)
 
 # Add executable target with source files listed in SOURCE_FILES variable
 add_executable(AES128 ${SOURCE_FILES})
+add_subdirectory (include)
+add_subdirectory (src)
