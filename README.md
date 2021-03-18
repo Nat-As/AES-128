@@ -8,4 +8,5 @@ AES 128 implementation encrypting a 1GB test file.
 5. Veryfy the plaintext is the same when decrypted ```hexdump -n64 sample.txt.new```
 
 # Using this implementation
-1. 
+1. ``` cd .. ```
+2. ``` cmake AES-128 ```
