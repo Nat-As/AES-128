@@ -35,16 +35,21 @@ void newline() {
 }
 
 // Add round key
+// TODO: Update args to take in state array as well
 void add_round_key(byte *byte_array) {
     // Fill this function
 }
 
 // S-box ( Substitute a single byte )
 byte substitute_byte(byte byte_to_substitute) {
-    // Fill this function
+    byte sub_byte = sub_table[byte_to_substitute];
+    return sub_byte;
 }
 
 // substitute the bytes of the state array
 void substitute_bytes(byte *byte_array) {
     // Fill this function
+    for (size_t i = 0; i < 16; i++) {
+        byte_array[i] = substitute_byte(byte_array[i]);
+    }
 }
