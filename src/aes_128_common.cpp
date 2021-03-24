@@ -48,7 +48,6 @@ byte substitute_byte(byte byte_to_substitute) {
 
 // substitute the bytes of the state array
 void substitute_bytes(byte *byte_array) {
-    // Fill this function
     for (size_t i = 0; i < 16; i++) {
         byte_array[i] = substitute_byte(byte_array[i]);
     }
