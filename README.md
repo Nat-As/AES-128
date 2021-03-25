@@ -10,3 +10,4 @@ AES 128 implementation encrypting a 1GB test file.
 # Using this implementation
 1. ``` cd .. ```
 2. ``` cmake AES-128 ```
+3. ``` make ```
