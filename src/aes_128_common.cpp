@@ -35,9 +35,11 @@ void newline() {
 }
 
 // Add round key
-// TODO: Update args to take in state array as well
-void add_round_key(byte *byte_array) {
-    // Fill this function
+void add_round_key(byte *byte_array, byte *state) {
+    // state = state XOR round key
+    for (size_t i = 0; i < 16; i++) {
+        state[i] = byte_array[i] ^ state[i];
+    }
 }
 
 // S-box ( Substitute a single byte )

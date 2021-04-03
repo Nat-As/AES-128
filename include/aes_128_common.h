@@ -33,7 +33,7 @@ void print_state(byte *byte_array);
 
 void newline();
 
-void add_round_key(byte *byte_array);
+void add_round_key(byte *byte_array, byte *state);
 
 byte substitute_byte(byte byte_to_substitute);
 
