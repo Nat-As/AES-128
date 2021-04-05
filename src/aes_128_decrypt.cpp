@@ -3,7 +3,26 @@
 // Decryption function
 byte *decrypt_aes_128(byte *ciphertext, byte *key) {
     byte *plaintext = NULL;
-    // Fill this function
+    byte state[16];
+
+    for (int x = 0; x < 16; x++){
+        state[x] = ciphertext[x];
+    }
+    add_round_key(state, key + 160);
+    for (int y = 9; y > 0 ; y--)
+    {
+        inverse_shift_rows(state);
+        inverse_substitute_bytes(state);
+        add_round_key(state, key + (16 * y));
+        inverse_mix_columns(state);
+    }
+    inverse_shift_rows(state);
+    inverse_substitute_bytes(state);
+    add_round_key(state, key);
+    for (int z = 0; z < 16; z++)
+    {
+        plaintext[z] = state[z];
+    }
     return plaintext;
 }
 
