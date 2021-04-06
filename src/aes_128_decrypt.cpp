@@ -1,4 +1,5 @@
 #include "../include/aes_128_decrypt.h"
+#include "../include/aes_128_key_expansion.h"
 
 // Decryption function
 byte *decrypt_aes_128(byte *ciphertext, byte *key) {
@@ -8,17 +9,17 @@ byte *decrypt_aes_128(byte *ciphertext, byte *key) {
     for (int x = 0; x < 16; x++){
         state[x] = ciphertext[x];
     }
-    add_round_key(state, key + 160);
+    add_round_key(state, get_round_key(key, 0x0A));
     for (int y = 9; y > 0 ; y--)
     {
         inverse_shift_rows(state);
         inverse_substitute_bytes(state);
-        add_round_key(state, key + (16 * y));
+        add_round_key(state, get_round_key(key, y)));
         inverse_mix_columns(state);
     }
     inverse_shift_rows(state);
     inverse_substitute_bytes(state);
-    add_round_key(state, key);
+    add_round_key(state, get_round_key(key, 0));
     for (int z = 0; z < 16; z++)
     {
         plaintext[z] = state[z];
