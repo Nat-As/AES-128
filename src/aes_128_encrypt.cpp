@@ -66,17 +66,14 @@ void mix_columns(byte* byte_array) {
 }
 
 //first rounds of encryption, number of rounds specified in main encryption function
-void round(byte* byte_array, byte* key) {
-	substitute_bytes(byte_array);
-	shift_rows(byte_array);
-	mix_columns(byte_array);
+void round(byte* byte_array) {
+	
 	
 }
 
 //Same as Round but without Mix Column
 void final_round(byte* byte_array, byte* key) {
-	substitute_bytes(byte_array);
-	shift_rows(byte_array);
+	
 	
 }
 
@@ -88,17 +85,18 @@ byte* encrypt_aes_128(byte* plaintext, byte* key, byte* byte_array) {
 		byte_array[i] = plaintext[i];
 	}
 
-	int numberOfRounds = 10;
+	add_round_key(byte_array, key);
 
-	add_round_key(byte_array, get_round_key(key, 0x0A));
-
-	for (int i = 0; i < numberOfRounds; i++) {
-		round(byte_array, key + (16 * (i + 1)));
-		add_round_key(byte_array, get_round_key(key, numberOfRounds));
+	for (int i = 1; i < 9; i++) {
+		substitute_bytes(byte_array);
+		shift_rows(byte_array);
+		mix_columns(byte_array);
+		add_round_key(byte_array, get_round_key(key, i));
 	}
 
-	final_round(byte_array, key + 160);
-	add_round_key(byte_array, get_round_key(key, 0));
+	substitute_bytes(byte_array);
+	shift_rows(byte_array);
+	add_round_key(byte_array, get_round_key(key, 10));
 
 	for (int i = 0; i < 16; i++) {
 		ciphertext[i] = byte_array[i];
