@@ -1,5 +1,6 @@
 #include "../include/aes_128_encrypt.h"
 #include "../include/aes_128_common.h"
+#include "../include/aes_128_key_expansion.h"
 
 // Shift rows
 void shift_rows(byte* byte_array) {
@@ -69,14 +70,14 @@ void round(byte* byte_array, byte* key) {
 	substitute_bytes(byte_array);
 	shift_rows(byte_array);
 	mix_columns(byte_array);
-	add_round_key(byte_array, key);
+	
 }
 
 //Same as Round but without Mix Column
 void final_round(byte* byte_array, byte* key) {
 	substitute_bytes(byte_array);
 	shift_rows(byte_array);
-	add_round_key(byte_array, key);
+	
 }
 
 // Encryption function
@@ -89,13 +90,15 @@ byte* encrypt_aes_128(byte* plaintext, byte* key, byte* byte_array) {
 
 	int numberOfRounds = 10;
 
-	add_round_key(byte_array, key);
+	add_round_key(byte_array, get_round_key(key, 0x0A));
 
 	for (int i = 0; i < numberOfRounds; i++) {
 		round(byte_array, key + (16 * (i + 1)));
+		add_round_key(byte_array, get_round_key(key, numberOfRounds));
 	}
 
 	final_round(byte_array, key + 160);
+	add_round_key(byte_array, get_round_key(key, 0));
 
 	for (int i = 0; i < 16; i++) {
 		ciphertext[i] = byte_array[i];
