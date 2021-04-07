@@ -75,7 +75,7 @@ byte* encrypt_aes_128(byte* plaintext, byte* key, byte* byte_array) {
 
 	add_round_key(byte_array, key);
 
-	for (int i = 1; i < 9; i++) {
+	for (int i = 1; i < 10; i++) {
 		substitute_bytes(byte_array);
 		shift_rows(byte_array);
 		mix_columns(byte_array);
