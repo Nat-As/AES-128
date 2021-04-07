@@ -65,18 +65,6 @@ void mix_columns(byte* byte_array) {
 	}
 }
 
-//first rounds of encryption, number of rounds specified in main encryption function
-void round(byte* byte_array) {
-	
-	
-}
-
-//Same as Round but without Mix Column
-void final_round(byte* byte_array, byte* key) {
-	
-	
-}
-
 // Encryption function
 byte* encrypt_aes_128(byte* plaintext, byte* key, byte* byte_array) {
 	byte* ciphertext = NULL;
