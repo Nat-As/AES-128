@@ -19,7 +19,7 @@ byte *decrypt_aes_128(byte *ciphertext, byte *key) {
     }
     inverse_shift_rows(state);	
     inverse_substitute_bytes(state);
-    add_round_key(state, get_round_key(key, 0));
+    add_round_key(state, key);
     for (int z = 0; z < 16; z++)
     {
         plaintext[z] = state[z];
