@@ -64,7 +64,7 @@ byte *g_function(byte *byte_word)
 {
     byte *g_return_word = new byte[4];
     // Fill this function
-	::circular_left_shift(byte_word);
+	circular_left_shift(byte_word);
 	// XOR S Box results with Round Constant (Concatenate with last round key)
 	for (unsigned char round_number = 1; round_number <= 10; round_number++){
 		// Evaluate
