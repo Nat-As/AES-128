@@ -4,8 +4,18 @@
 
 using namespace std;
 
+// Prototypes
+class keyspace {
+	public:
+		void circular_left_shift(byte *byte_word);
+		void add_round_constant(byte *byte_word, unsigned char round_number);
+		byte *g_function(byte *byte_word);
+		byte *get_round_key(byte *key_bytes, unsigned char round_number);
+};
+
+
 // Circular Left Shift (Rotate Left)
-void circular_left_shift(byte *byte_word) {
+void keyspace::circular_left_shift(byte *byte_word) {
     // Fill this function
 	byte temp[4];
 	// Shift
@@ -21,7 +31,7 @@ void circular_left_shift(byte *byte_word) {
 }
 
 // Add Round Constant
-void add_round_constant(byte *byte_word, unsigned char round_number) {
+void keyspace::add_round_constant(byte *byte_word, unsigned char round_number) {
     // Not ideal, but get's the job done.
 	switch (round_number){
 		case 1:
@@ -53,7 +63,7 @@ byte *g_function(byte *byte_word)
 {
     byte *g_return_word = new byte[4];
     // Fill this function
-	circular_left_shift(*byte_word);
+	::circular_left_shift(*byte_word);
 	// XOR S Box results with Round Constant (Concatenate with last round key)
 	for (unsigned char round_number = 1; round_number <= 10; round_number++){
 		*g_return_word = *g_return_word | substitute_bytes(*byte_word) ^ add_round_constant(*byte_word, round_number);
@@ -69,7 +79,7 @@ byte *get_round_key(byte *key_bytes, unsigned char round_number) {
     // Fill this function
     // Note: Don't forget to delete the return of the g_function once you are done using it
 	for (unsigned char round_number = 1; round_number <= 10; round_number++){
-		*round_key = substitute_bytes(*key_bytes) ^ add_round_constant(*key_bytes, round_number);
+		*round_key = substitute_bytes(key_bytes) ^ add_round_constant(*key_bytes, round_number);
 	}
     return round_key;
 }
