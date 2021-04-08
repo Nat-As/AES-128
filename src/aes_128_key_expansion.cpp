@@ -1,6 +1,6 @@
 #include <iostream>
 #include "../include/aes_128_key_expansion.h"
-#include "../include/aes_128_common.h"
+//#include "../include/aes_128_common.h"
 
 using namespace std;
 
@@ -68,7 +68,7 @@ byte *g_function(byte *byte_word)
 	// XOR S Box results with Round Constant (Concatenate with last round key)
 	for (unsigned char round_number = 1; round_number <= 10; round_number++){
 		// Evaluate
-		add_round_constant(byte_word);
+		add_round_constant(byte_word, round_number);
 		// Calculate
 		*g_return_word = *g_return_word | substitute_byte(*byte_word) ^ *byte_word;
 	}
