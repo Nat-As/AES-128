@@ -70,7 +70,7 @@ byte *g_function(byte *byte_word)
 		// Evaluate
 		add_round_constant(byte_word);
 		// Calculate
-		g_return_word = g_return_word | substitute_bytes(byte_word) ^ byte_word;
+		*g_return_word = *g_return_word | substitute_byte(*byte_word) ^ *byte_word;
 	}
 	
     return g_return_word;
