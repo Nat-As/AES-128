@@ -11,3 +11,6 @@ AES 128 implementation encrypting a 1GB test file.
 1. ``` cd .. ```
 2. ``` cmake AES-128 ```
 3. ``` make ```
+
+# Known Issues
++ [UNIX / MacOS Targets](https://github.com/Nat-As/AES-128/issues)
