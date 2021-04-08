@@ -1,6 +1,6 @@
 #include <iostream>
-#include "include/aes_128_key_expansion.h"
-#include "include/aes_128_common.h"
+#include "../include/aes_128_key_expansion.h"
+#include "../include/aes_128_common.h"
 
 using namespace std;
 
