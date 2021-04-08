@@ -5,7 +5,7 @@
 
 void circular_left_shift(byte *byte_word);
 
-void add_round_constant(byte *byte_word);
+void add_round_constant(byte *byte_word, unsigned char round_number);
 
 byte *g_function(byte *byte_word);
 
