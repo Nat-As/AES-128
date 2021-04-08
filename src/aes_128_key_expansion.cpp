@@ -7,6 +7,7 @@ using namespace std;
 // Prototypes
 class keyspace {
 	public:
+	unsigned char round_number;
 		void circular_left_shift(byte *byte_word);
 		void add_round_constant(byte *byte_word, unsigned char round_number);
 		byte *g_function(byte *byte_word);
@@ -66,7 +67,10 @@ byte *g_function(byte *byte_word)
 	::circular_left_shift(byte_word);
 	// XOR S Box results with Round Constant (Concatenate with last round key)
 	for (unsigned char round_number = 1; round_number <= 10; round_number++){
-		*g_return_word = *g_return_word | substitute_bytes(byte_word) ^ add_round_constant(byte_word, round_number);
+		// Evaluate
+		add_round_constant(byte_word);
+		// Calculate
+		g_return_word = g_return_word | substitute_bytes(byte_word) ^ byte_word;
 	}
 	
     return g_return_word;
@@ -78,9 +82,7 @@ byte *get_round_key(byte *key_bytes, unsigned char round_number) {
     byte *round_key = new byte[16];
     // Fill this function
     // Note: Don't forget to delete the return of the g_function once you are done using it
-	for (unsigned char round_number = 1; round_number <= 10; round_number++){
-		*round_key = substitute_bytes(key_bytes) ^ add_round_constant(*key_bytes, round_number);
-	}
+	cout << g_function(key_bytes);
     return round_key;
 }
 
